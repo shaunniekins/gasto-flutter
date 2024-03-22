@@ -14,6 +14,16 @@ class _MainPageState extends State<MainPage> {
     {'title': 'Travel', 'amount': -150},
     {'title': 'Shopping', 'amount': -75},
     {'title': 'Salary', 'amount': 2500},
+    {'title': 'Salary', 'amount': 2500},
+    {'title': 'Shopping', 'amount': -75},
+    {'title': 'Shopping', 'amount': -75},
+    {'title': 'Shopping', 'amount': -75},
+    {'title': 'Salary', 'amount': 2500},
+    {'title': 'Salary', 'amount': 2500},
+    {'title': 'Salary', 'amount': 2500},
+    {'title': 'Shopping', 'amount': -75},
+    {'title': 'Salary', 'amount': 2500},
+    {'title': 'Salary', 'amount': 2500},
   ];
 
   @override
@@ -31,7 +41,7 @@ class _MainPageState extends State<MainPage> {
               backgroundImage: AssetImage('assets/images/gasto_logo.jpeg'),
               radius: 15.0,
             ),
-            toolbarHeight: 60.0, // Adjust the height as needed
+            toolbarHeight: 60.0,
             toolbarOpacity: 1.0,
           ),
         ),
@@ -80,24 +90,36 @@ class _MainPageState extends State<MainPage> {
               ),
               const SizedBox(height: 8.0),
               Expanded(
-                child: ListView.builder(
-                  itemCount: transactions.length,
-                  itemBuilder: (context, index) {
-                    final transaction = transactions[index];
-                    return ListTile(
-                      title: Text(transaction['title']),
-                      trailing: Text(
-                        '\$${transaction['amount'].abs().toString()}',
-                        style: TextStyle(
-                          color: transaction['amount'] >= 0
-                              ? Colors.green
-                              : Colors.red,
-                        ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: transactions.length,
+                        itemBuilder: (context, index) {
+                          final transaction = transactions[index];
+                          return Card(
+                            color: GlobalColors.thirdTheme,
+                            margin: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: ListTile(
+                              title: Text(transaction['title']),
+                              trailing: Text(
+                                '\$${transaction['amount'].abs().toString()}',
+                                style: TextStyle(
+                                  color: transaction['amount'] >= 0
+                                      ? Colors.green
+                                      : Colors.red,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ],
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ),
